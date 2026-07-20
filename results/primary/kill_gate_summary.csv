@@ -1,0 +1,7 @@
+model_id,total_state_dim,mean_macro_f1,recurrent_param_count,recurrent_state_bytes
+monolithic,16,0.9921,256,64
+monolithic,32,0.9917,1024,128
+factored,16,0.9887,128,64
+factored,32,0.9932,512,128
+random,16,0.9925,128,64
+random,32,0.9945,512,128

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "BeatState-AF: Capacity-matched physiology-factored state allocation for continuous AF detection"
+message: "If you use this software, please cite it."
+authors:
+  - family-names: Roy
+    given-names: Subhajit
+version: 0.1.0
+date-released: 2026-07-20
+license: MIT
+repository-code: "https://github.com/subhajitroy005/BeatState-AF"

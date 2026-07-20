@@ -1,0 +1,17 @@
+# FROZEN pilot config -- the dirty kill. Every experiment-defining value lives here.
+experiment_id: kill_gate_pilot
+dataset_id: synthetic_v1          # TODO(claude-code): swap to afdb_oracle then afdb_deployable
+n_patients: 40
+n_beats: 500
+p_af: 0.35
+p_discordance: 0.12
+train_frac: 0.6
+seeds: [0, 1, 2]
+models: [monolithic, factored, random]
+state_dims: [16, 32]
+dtype_bytes: 4
+# success routes (see docs/protocol.md, section 3.5 of the roadmap)
+superiority_margin: 0.0          # factored - monolithic macro-F1, CI lower bound > margin
+equivalence_margin: 0.02         # compression: |factored@low - monolithic@high| within margin
+compression_low_dim: 16
+compression_high_dim: 32

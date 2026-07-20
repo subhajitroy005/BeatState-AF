@@ -1,0 +1,8 @@
+name: beatstate-af
+channels: [conda-forge]
+dependencies:
+  - python>=3.10
+  - numpy>=1.24
+  - pyyaml>=6.0
+  - pip
+  # - pip: [wfdb>=4.1, torch>=2.2, scipy>=1.11, pytest>=7]   # enable for real data

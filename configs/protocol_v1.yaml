@@ -1,0 +1,38 @@
+# FROZEN research protocol (preregistration). Do not edit after the kill gate runs;
+# fork a v2 instead. Mirrors roadmap sections 2-4.
+protocol_version: 1
+law: >
+  Under a fixed total recurrent-state and software-memory envelope, physiology-
+  factored state (atrial-morphology | ventricular-rhythm) yields greater continuous
+  AF utility than a capacity-matched monolithic state, largest under discordance.
+statistical_unit: patient          # seeds are optimization noise, never extra patients
+primary_task: continuous_af_episode_detection
+secondary_endpoint: af_burden
+success_routes:
+  compression:                     # PREFERRED headline
+    rule: equivalent_utility_at_half_or_less_recurrent_state_bytes
+    equivalence_margin_macro_f1: 0.02
+  superiority:
+    rule: factored_beats_monolithic_at_matched_budget
+    margin_macro_f1: 0.0
+fairness_controls:
+  matched_total_state_dim: true    # monolithic dim == atrial_dim + rhythm_dim
+  matched_precision: true
+  shared_tokens: true
+  sparsity_control_required: true  # MUST beat random-assignment before crediting physiology
+  count_preprocessing_and_qrs_in_ledger: true
+  primary_uses_deployable_r_peaks: true   # oracle R = upper-bound diagnostic only
+kill_criterion: >
+  Stop the novel-model direction if neither success route holds, the random-
+  assignment control is not beaten, and no discordance signal appears. Do not add
+  attention/Transformer/Mamba/branches to rescue a failure.
+must_not_claim:
+  - constant_memory_streaming_is_novel
+  - dual_branch_morphology_rhythm_is_novel_alone
+  - matched_dimension_equals_matched_capacity
+  - algorithmic_bytes_equal_measured_mcu_sram
+  - unsupervised_adaptation_when_labels_are_revealed
+metrics:
+  primary: macro_f1                # never accuracy (majority-normal)
+  episode: [event_sensitivity, false_alarms_24h, onset_delay, termination_delay]
+  memory: [recurrent_state_bytes, recurrent_param_count, static_bytes]

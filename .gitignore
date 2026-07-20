@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+datasets/raw/
+datasets/interim/
+datasets/processed/
+checkpoints/
+*.egg-info/
+.venv/

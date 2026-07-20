@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beatstate-af"
+version = "0.1.0"
+description = "Capacity-matched physiology-factored state allocation for continuous AF detection"
+authors = [{ name = "Subhajit Roy" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+# added by Claude Code when moving from synthetic to real data / trained models
+real = ["wfdb>=4.1", "torch>=2.2", "scipy>=1.11"]
+dev = ["pytest>=7"]
+
+[tool.setuptools]
+packages = ["beatstate_af"]
