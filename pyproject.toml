@@ -15,5 +15,5 @@ dependencies = ["numpy>=1.24", "pyyaml>=6.0"]
 real = ["wfdb>=4.1", "torch>=2.2", "scipy>=1.11"]
 dev = ["pytest>=7"]
 
-[tool.setuptools]
-packages = ["beatstate_af"]
+[tool.setuptools.packages.find]
+include = ["beatstate_af*"]

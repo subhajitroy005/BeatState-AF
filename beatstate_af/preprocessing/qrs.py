@@ -15,86 +15,43 @@ and are used only as an upper-bound diagnostic (Delta_QRS).
 """
 from __future__ import annotations
 import numpy as np
-from scipy.signal import butter, lfilter
+from beatstate_af.preprocessing.qrs_stream import StreamingQRSDetector
 
 
 class CausalQRSDetector:
     def __init__(self, fs: int, bandpass=(5.0, 15.0), refractory_s=0.20,
                  integ_window_s=0.150, search_back_s=0.10):
-        self.fs = int(fs)
-        self.refractory = int(refractory_s * fs)
-        self.win = max(1, int(integ_window_s * fs))
-        self.search_back = int(search_back_s * fs)
-        lo, hi = bandpass
-        # 1st-order Butterworth band-pass (causal IIR; 2 states per section).
-        self.b, self.a = butter(1, [lo / (fs / 2), hi / (fs / 2)], btype="band")
-        self._order = max(len(self.a), len(self.b)) - 1
+        self._stream = StreamingQRSDetector(
+            fs=fs,
+            bandpass=bandpass,
+            refractory_s=refractory_s,
+            integ_window_s=integ_window_s,
+            search_back_s=search_back_s,
+        )
+        self.fs = self._stream.fs
+        self.refractory = self._stream.refractory
+        self.win = self._stream.win
+        self.search_back = self._stream.search_back
 
     # ---- software-memory ledger --------------------------------------------
     def persistent_state_elems(self) -> int:
         """Number of float state elements held between samples (O(1) in signal length)."""
-        filt_states = 2 * self._order            # band-pass + derivative filter memories
-        ring_buffer = self.win                   # moving-window integrator buffer
-        scalars = 4                              # SPKI, NPKI, threshold, last-peak index
-        return filt_states + ring_buffer + scalars
+        return self._stream.persistent_state_bytes() // np.dtype(np.float32).itemsize
 
     def state_bytes(self, dtype_bytes: int = 4) -> int:
-        return self.persistent_state_elems() * dtype_bytes
+        return self._stream.state_bytes(dtype_bytes)
+
+    def reset(self) -> None:
+        self._stream.reset()
+
+    def step(self, sample: float) -> list[int]:
+        return self._stream.step(sample)
 
     # ---- detection ----------------------------------------------------------
     def detect(self, sig: np.ndarray) -> np.ndarray:
         """Return R-peak sample indices for a 1-D ECG signal (causal pipeline).
 
-        Pan-Tompkins adaptive thresholding over candidate local maxima of the
-        integrated signal: SPKI/NPKI update on signal/noise peaks (not every
-        sample), with a refractory period and RR-based search-back for missed
-        beats. All decisions use only present and past samples.
+        Convenience wrapper around reset()/step(sample). Primary E01v2 execution
+        uses the step path directly; this method remains for diagnostics/tests.
         """
-        x = np.asarray(sig, dtype=float)
-        if x.size < self.fs:
-            return np.array([], dtype=int)
-        bp = lfilter(self.b, self.a, x)                      # causal band-pass
-        deriv = np.diff(bp, prepend=bp[0])                   # causal derivative
-        sq = deriv * deriv                                   # squaring
-        csum = np.cumsum(sq)                                 # causal moving-window integration
-        mwi = csum.copy()
-        mwi[self.win:] = csum[self.win:] - csum[:-self.win]
-        mwi = mwi / self.win
-
-        # candidate peaks = local maxima of the integrated signal
-        i0 = np.arange(1, mwi.size - 1)
-        cand = i0[(mwi[i0] > mwi[i0 - 1]) & (mwi[i0] >= mwi[i0 + 1])]
-        if cand.size == 0:
-            return np.array([], dtype=int)
-
-        learn = mwi[: 2 * self.fs]
-        spki = 0.25 * float(np.max(learn)) if learn.size else float(np.max(mwi))
-        npki = 0.5 * float(np.mean(learn)) if learn.size else float(np.mean(mwi))
-
-        def refine(c):
-            s0 = max(0, c - self.search_back)
-            return s0 + int(np.argmax(np.abs(bp[s0: c + 1])))
-
-        peaks = []
-        rr = []
-        last = -self.refractory
-        for c in cand:
-            if c - last < self.refractory:
-                continue
-            P = mwi[c]
-            thr = npki + 0.25 * (spki - npki)
-            accept = P > thr
-            if not accept and peaks and rr:
-                # search-back: recover a missed beat if overdue and half-threshold
-                if (c - last) > int(1.5 * np.mean(rr[-8:])) and P > 0.5 * thr:
-                    accept = True
-            if accept:
-                r = refine(c)
-                if peaks:
-                    rr.append(r - peaks[-1])
-                peaks.append(r)
-                last = c
-                spki = 0.125 * P + 0.875 * spki
-            else:
-                npki = 0.125 * P + 0.875 * npki
-        return np.array(sorted(set(peaks)), dtype=int)
+        return self._stream.detect(sig)

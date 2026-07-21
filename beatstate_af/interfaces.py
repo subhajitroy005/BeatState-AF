@@ -6,7 +6,7 @@ ledger, and the fairness controls are identical across architectures.
 """
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Protocol, TypedDict
+from typing import NotRequired, Protocol, TypedDict
 import numpy as np
 
 
@@ -32,6 +32,23 @@ class MemoryReport(TypedDict):
     atrial_state_dim: int
     rhythm_state_dim: int
     dtype_bytes: int
+    model_weight_bytes: int
+    model_bias_bytes: int
+    readout_bytes: int
+    normalizer_bytes: int
+    filter_constant_bytes: int
+    qrs_persistent_bytes: int
+    qrs_scratch_bytes: int
+    feature_persistent_bytes: int
+    feature_scratch_bytes: int
     recurrent_state_bytes: int
+    recurrent_step_activation_bytes: int
+    output_bytes: int
+    total_static_bytes: int
+    total_persistent_bytes: int
+    total_peak_inference_bytes: int
     recurrent_param_count: int
+    total_model_param_count: int
+    estimated_ops_per_beat: int
+    readout_param_count: NotRequired[int]
     readout_param_count: int

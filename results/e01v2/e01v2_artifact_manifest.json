@@ -1,0 +1,32 @@
+{
+  "full_commit_sha": "eee81c35ddf8bf7cbcd1a377b926a6c34cc4a437",
+  "artifacts": {
+    "figures/audit/e01v2_training_curves.svg": "72ea318c1f7319c1ceb0da0f76a3ed854dfe8415a66d80671f15642b5eddb89a",
+    "figures/e01v2/oracle_vs_deployable.svg": "729941b9c94954d38c52bf0f3bcab36ae1399e5f6ce81737dc9de86021c79b23",
+    "figures/e01v2/patient_paired_differences.svg": "a5650986a00cb9c7b0f0106867ddefd824f8e5a6257c701ee725429d92f12a8d",
+    "figures/e01v2/semantic_vs_random.svg": "222c12ab39e83cdccccd54f5e30e24022c064c64dde7733b40764c639a1a419a",
+    "figures/e01v2/state_memory_comparison.svg": "be6f384c521ece44e8892e23209351b9172b2939edd0170b45210ee60eebed2b",
+    "figures/e01v2/training_convergence.svg": "fd8e1b06f016ca6aae3e57a63580b851f8bb8f857e1944cbf86183110c49729e",
+    "results/e01v2/deployable/e01v2_decision.md": "e686c3fc4867a76f9a55b1852c18a1566da8566bf94a025efac4fad73446f650",
+    "results/e01v2/deployable/e01v2_discordance.csv": "d70a313bdde1126df2625fc217bb6ca84f77dc76e9bbd2b47ede205fc9003110",
+    "results/e01v2/deployable/e01v2_memory_ledger.csv": "f99b4fbf62e9e081c651f6ec7a0562dd2ac244f18555633bf00409186340a798",
+    "results/e01v2/deployable/e01v2_model_summary.csv": "d25ee808b8c9b87a38280b09dd3cf12b090992f199c765c83e0ef5d3b20abb54",
+    "results/e01v2/deployable/e01v2_paired_tests.csv": "2d97f2eeee206866c25a28d8636192af469b0baacedb13bc234b7fd69be2f95b",
+    "results/e01v2/deployable/e01v2_patient_aggregated.csv": "6978c3182e3a3bded7478d626fca54fa184da6c4edcbf369f0d5e49718ab0f32",
+    "results/e01v2/deployable/e01v2_qrs_metrics.csv": "692ec7001d6173d62f6c25602a74fc93b503fe8fa5582c55b65168d3f340b4eb",
+    "results/e01v2/deployable/e01v2_seed_patient.csv": "79e8184eee24859ecdbbd96351d19a30969bf07b5f9d9a3372597776c103e561",
+    "results/e01v2/e01v2_artifact_manifest.json": "a062e0959255e2341f7780c9e6c281e32b0bcdd502e7231012398b97e8591b8a",
+    "results/e01v2/e01v2_delta_qrs.csv": "7b1b33c06dfa235685433b71478192c3ab30c24d313bab4c36ccdc502e03cefa",
+    "results/e01v2/e01v2_environment.json": "8c84785045c3ddbda3b5aa5e3c026657eec7c340185279d7184377e56ba88e4b",
+    "results/e01v2/e01v2_final_decision.md": "2dca1adc3f4d42ad554636cb860b06f14425109e4fbe08c35f6ac21ad701fa69",
+    "results/e01v2/oracle/e01v2_decision.md": "d103c0b352e8d1857ccf69138d67e2e8882a4f9a4ce1cb0678ce46cdc9af1e70",
+    "results/e01v2/oracle/e01v2_discordance.csv": "4ff764e6e3fa670bdf586185180c255d19b0774a61f925edb8721b96aab4a71a",
+    "results/e01v2/oracle/e01v2_memory_ledger.csv": "c153e828d7d0835ad15c8d8613a0beaf755f2360d0ab9e363a50ec008903e17f",
+    "results/e01v2/oracle/e01v2_model_summary.csv": "aa4602b5b984ca96461e1c48a171b0ffdf0b53ce5c2d90d3d496b2b2a807e214",
+    "results/e01v2/oracle/e01v2_paired_tests.csv": "6f291297f82f3931688d891203f820db0a86a90d71d0599fc412e34e0a6a76da",
+    "results/e01v2/oracle/e01v2_patient_aggregated.csv": "bb12407b4cd7e8a35d02924fa8c03b27e21e1adbeebe7d12648f568a0340d4d1",
+    "results/e01v2/oracle/e01v2_seed_patient.csv": "b8f9c0da93c1e80505f533eb82e4453917692086f91f2f0484819b6928efb550",
+    "results/validation/e01v2_selected_hyperparameters.yaml": "aed510a0e5691accbafac5a49fce825dc6438fdf56f43baa856b6ce619c99885",
+    "results/validation/e01v2_training_curves.csv": "8414fb7a127f7269e080fc98f35f548e0f9e521a00584533e75fb31a34a64659"
+  }
+}

@@ -1,0 +1,20 @@
+dataset: afdb_v2
+source_manifest: manifests/afdb_records.json
+manifest: manifests/afdb_records.json
+split_manifest: manifests/afdb_split_v2.json
+cache_dir: data/afdb
+fs_hz: 250
+signal_channel: 0
+per_record_max_beats: 5000
+atrial_idx: [0, 1, 2, 3]
+rhythm_idx: [4, 5, 6, 7]
+af_rhythms: ["AFIB"]
+qrs_modes: [oracle, deployable]
+qrs_reference_tolerance_s: 0.150
+normalization:
+  signal_policy: training_patient_median_mad
+  token_policy: training_patient_mean_std
+discordance:
+  transition_window_s: 5.0
+  nonaf_arrhythmia: ["AFL", "J"]
+  low_sqi_percentile: 10

@@ -13,13 +13,53 @@ signal-quality index (SQI) is returned for the prespecified low-SQI discordant
 subset (see docs/discordance_definition.md).
 """
 from __future__ import annotations
+from dataclasses import dataclass
 import numpy as np
 
 
-def _robust_normalize(sig: np.ndarray) -> np.ndarray:
-    med = np.median(sig)
-    mad = np.median(np.abs(sig - med)) + 1e-9
-    return (sig - med) / (1.4826 * mad)
+@dataclass(frozen=True)
+class SignalNormalizer:
+    """Frozen signal scaling constants.
+
+    E01v2 uses one instance computed from training patients only. The legacy
+    no-argument path below remains for old diagnostic code, but confirmatory v2
+    feature extraction must pass explicit constants.
+    """
+
+    median: float
+    scale: float
+    dtype_bytes: int = 4
+
+    @property
+    def nbytes(self) -> int:
+        return 2 * self.dtype_bytes
+
+    def apply(self, sig: np.ndarray) -> np.ndarray:
+        x = np.asarray(sig, dtype=np.float32)
+        return (x - np.float32(self.median)) / np.float32(self.scale)
+
+
+def robust_signal_normalizer(sig: np.ndarray, dtype_bytes: int = 4) -> SignalNormalizer:
+    x = np.asarray(sig, dtype=np.float32)
+    med = float(np.median(x))
+    mad = float(np.median(np.abs(x - med)))
+    scale = max(1.4826 * mad, 1e-9)
+    return SignalNormalizer(median=med, scale=scale, dtype_bytes=dtype_bytes)
+
+
+def pooled_signal_normalizer(signals, dtype_bytes: int = 4) -> SignalNormalizer:
+    """Median/MAD over training-patient samples only."""
+    arrays = [np.asarray(s, dtype=np.float32).ravel() for s in signals]
+    if not arrays:
+        raise ValueError("cannot compute a signal normalizer from no signals")
+    x = np.concatenate(arrays)
+    return robust_signal_normalizer(x, dtype_bytes=dtype_bytes)
+
+
+def _robust_normalize(sig: np.ndarray, normalizer: SignalNormalizer | None = None) -> np.ndarray:
+    if normalizer is None:
+        normalizer = robust_signal_normalizer(sig)
+    return normalizer.apply(sig)
 
 
 def _atrial_morphology(seg: np.ndarray):
@@ -63,14 +103,28 @@ def _sqi(win: np.ndarray, fs: float) -> float:
     return float(phys / total)
 
 
+def feature_memory_report(fs: float, rr_window: int = 8, dtype_bytes: int = 4) -> dict[str, int]:
+    """Persistent and one-beat scratch bytes for the causal feature path."""
+    seg_a0 = int(0.25 * fs)
+    seg_a1 = int(0.05 * fs)
+    win_q = int(0.30 * fs)
+    atrial_window = max(0, seg_a0 - seg_a1)
+    persistent = (rr_window + 1) * dtype_bytes  # RR ring + previous RR scalar
+    scratch = (8 + atrial_window + win_q) * dtype_bytes
+    return {
+        "feature_persistent_bytes": int(persistent),
+        "feature_scratch_bytes": int(scratch),
+    }
+
+
 def extract_features(sig: np.ndarray, rpeaks: np.ndarray, fs: float,
-                     rr_window: int = 8):
+                     rr_window: int = 8, normalizer: SignalNormalizer | None = None):
     """Return (feat (T,8) float32, beat_samples (T,) int, sqi (T,) float).
 
     T is the number of beats for which a full causal context exists (drops the
     first beat, which has no prior RR).
     """
-    x = _robust_normalize(np.asarray(sig, dtype=float))
+    x = _robust_normalize(np.asarray(sig, dtype=np.float32), normalizer=normalizer)
     rp = np.asarray(rpeaks, dtype=int)
     rp = rp[(rp > int(0.30 * fs)) & (rp < x.size - 1)]
     if rp.size < 3:

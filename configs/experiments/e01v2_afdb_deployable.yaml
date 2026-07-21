@@ -1,0 +1,33 @@
+experiment_id: e01v2_afdb_deployable
+protocol_version: E01v2
+protocol_config: configs/protocol_v2.yaml
+dataset_id: afdb_v2_deployable
+dataset_config: configs/datasets/afdb_v2.yaml
+split_manifest: manifests/afdb_split_v2.json
+qrs_mode: deployable
+model_family: gru
+models: [gru_monolithic, gru_factored, gru_random]
+arm_monolithic: gru_monolithic
+arm_factored: gru_factored
+arm_random: gru_random
+model_seeds: [0, 1, 2, 3, 4]
+routing_seeds: [101]
+state_dims: [16, 32]
+dtype_bytes: 4
+primary_metric: present_class_macro_f1
+superiority_margin: 0.0
+noninferiority_margin: 0.02
+compression_low_dim: 16
+compression_high_dim: 32
+bootstrap_seed: 20260721
+bootstrap_reps: 5000
+allow_dirty: false
+selected_hyperparameters: results/validation/e01v2_selected_hyperparameters.yaml
+output_dir: results/e01v2/deployable
+gru:
+  epochs: 2
+  lr: 0.01
+  weight_decay: 0.0001
+  chunk_len: 1024
+  grad_clip: 2.0
+  train_max_beats: 800

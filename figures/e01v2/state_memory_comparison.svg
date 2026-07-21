@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="224">
+<rect width="900" height="100%" fill="white"/>
+<text x="24" y="36" font-family="monospace" font-size="18">E01v2 State/Memory Comparison</text>
+<text x="24" y="70" font-family="monospace" font-size="13">gru_factored-16: peak bytes 4416</text>
+<text x="24" y="94" font-family="monospace" font-size="13">gru_factored-32: peak bytes 10496</text>
+<text x="24" y="118" font-family="monospace" font-size="13">gru_monolithic-16: peak bytes 6720</text>
+<text x="24" y="142" font-family="monospace" font-size="13">gru_monolithic-32: peak bytes 18176</text>
+<text x="24" y="166" font-family="monospace" font-size="13">gru_random-16: peak bytes 4416</text>
+<text x="24" y="190" font-family="monospace" font-size="13">gru_random-32: peak bytes 10496</text>
+</svg>

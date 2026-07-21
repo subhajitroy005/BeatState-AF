@@ -51,3 +51,9 @@ Transformer / Mamba / extra branches to rescue it. Possible honest next studies 
 preregistration, not a rescue): stronger atrial-evidence tokens (multi-lead, longer
 context), or a dataset where atrial morphology is more informative — each would be a new
 law, separately gated.
+
+## E01v2 Audit-Corrected AFDB Kill Gate
+
+Outcome: `STOP_CONFIRMED`.
+
+The corrected deployable-primary E01v2 result did not establish a physiology-assigned state advantage over the non-semantic random structural control. The novel BeatState-AF model direction is closed for this AFDB single-lead GRU setting.

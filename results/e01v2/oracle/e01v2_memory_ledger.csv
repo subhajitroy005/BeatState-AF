@@ -1,0 +1,7 @@
+qrs_mode,model_id,total_state_dim,routing_seed,model_weight_bytes,model_bias_bytes,readout_bytes,normalizer_bytes,filter_constant_bytes,qrs_persistent_bytes,qrs_scratch_bytes,feature_persistent_bytes,feature_scratch_bytes,recurrent_state_bytes,recurrent_step_activation_bytes,output_bytes,total_static_bytes,total_persistent_bytes,total_peak_inference_bytes,recurrent_param_count,total_model_param_count,estimated_ops_per_beat
+oracle,gru_monolithic,16,,4608,384,68,72,0,0,0,36,532,64,192,8,5132,100,5964,768,1265,2658
+oracle,gru_monolithic,32,,15360,768,132,72,0,0,0,36,532,128,384,8,16332,164,17420,3072,4065,8386
+oracle,gru_factored,16,,2304,384,68,72,0,0,0,36,532,64,192,8,2828,100,3660,384,689,1506
+oracle,gru_factored,32,,7680,768,132,72,0,0,0,36,532,128,384,8,8652,164,9740,1536,2145,4546
+oracle,gru_random,16,101,2304,384,68,72,0,0,0,36,532,64,192,8,2828,100,3660,384,689,1506
+oracle,gru_random,32,101,7680,768,132,72,0,0,0,36,532,128,384,8,8652,164,9740,1536,2145,4546

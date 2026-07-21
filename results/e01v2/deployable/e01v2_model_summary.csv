@@ -1,0 +1,7 @@
+qrs_mode,model_id,total_state_dim,n_unique_test_patients,mean_present_class_macro_f1,mean_af_f1,total_peak_inference_bytes,total_static_bytes,total_persistent_bytes,recurrent_param_count
+deployable,gru_factored,16,5,0.1966237276601583,0.019184476516421724,4416.0,2852.0,800.0,384.0
+deployable,gru_factored,32,5,0.1955700102630038,0.007056340945590989,10496.0,8676.0,864.0,1536.0
+deployable,gru_monolithic,16,5,0.247162252847609,0.09139909811279713,6720.0,5156.0,800.0,768.0
+deployable,gru_monolithic,32,5,0.1945515654753695,0.01598342849096559,18176.0,16356.0,864.0,3072.0
+deployable,gru_random,16,5,0.19120263367094448,0.007222007298842914,4416.0,2852.0,800.0,384.0
+deployable,gru_random,32,5,0.19229089388776424,0.0067566818837512,10496.0,8676.0,864.0,1536.0

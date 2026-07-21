@@ -1,0 +1,82 @@
+protocol_version: E01v2
+experiment_id: e01v2_afdb_audit_corrected_confirmatory_kill
+dataset_id: afdb_v2
+split_seed: 20260721
+split_manifest: manifests/afdb_split_v2.json
+train_patients:
+  - "04015"
+  - "04048"
+  - "04126"
+  - "04746"
+  - "04908"
+  - "05121"
+  - "06453"
+  - "07859"
+  - "07879"
+  - "07910"
+  - "08219"
+  - "08405"
+  - "08434"
+  - "08455"
+validation_patients:
+  - "04043"
+  - "05091"
+  - "05261"
+  - "08215"
+test_patients:
+  - "04936"
+  - "06426"
+  - "06995"
+  - "07162"
+  - "08378"
+model_ids:
+  - gru_monolithic
+  - gru_factored
+  - gru_random
+model_seeds: [0, 1, 2, 3, 4]
+routing_seeds: [101]
+state_dims: [16, 32]
+precision:
+  dtype: float32
+  dtype_bytes: 4
+primary_metric: present_class_macro_f1
+secondary_metrics:
+  - af_f1
+  - sensitivity
+  - ppv
+  - specificity
+class_metric_policy:
+  absent_classes: excluded_from_present_class_macro_f1
+  af_f1_without_af_reference_beats: undefined
+noninferiority_margin: 0.02
+superiority_margin: 0.0
+bootstrap:
+  seed: 20260721
+  n_boot: 5000
+  alpha: 0.05
+training_selection_policy:
+  search_config: configs/search/e01v2_gru_search.yaml
+  selection_metric: validation_present_class_macro_f1
+  selection_scope: train_validation_only
+  selected_hyperparameters: results/validation/e01v2_selected_hyperparameters.yaml
+causal_normalization_policy:
+  signal: median_mad_from_training_patients_only
+  token_standardization: mean_std_from_training_patients_only
+discordance_rule:
+  transition_window_s: 5.0
+  nonaf_arrhythmia: ["AFL", "J"]
+  low_sqi_percentile: 10
+qrs_modes:
+  primary: deployable
+  diagnostic: oracle
+qrs_reference_tolerance_s: 0.150
+outputs:
+  deployable_dir: results/e01v2/deployable
+  oracle_dir: results/e01v2/oracle
+  validation_curves: results/validation/e01v2_training_curves.csv
+  final_decision: results/e01v2/e01v2_final_decision.md
+decision_logic:
+  compression_success: factored16_noninferior_to_monolithic32_and_lower_memory_and_factored16_superior_to_random16
+  same_budget_success: factored32_superior_to_monolithic32_and_random32
+  continue_requires: deployable_primary_route_and_random_control_survival
+  stop_confirmed_when: no_compression_no_same_budget_and_mechanism_not_confirmatory

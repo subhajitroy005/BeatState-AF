@@ -1,0 +1,32 @@
+{
+  "blas_backend": "{'Compilers': {'c': {'name': 'gcc', 'linker': 'ld.bfd', 'version': '14.2.1', 'commands': 'cc'}, 'cython': {'name': 'cython', 'linker': 'cython', 'version': '3.2.8', 'commands': 'cython'}, 'c++': {'name': 'gcc', 'linker': 'ld.bfd', 'version': '14.2.1', 'commands': 'c++'}}, 'Machine Information': {'host': {'cpu': 'x86_64', 'family': 'x86_64', 'endian': 'little', 'system': 'linux'}, 'build': {'cpu': 'x86_64', 'family': 'x86_64', 'endian': 'little', 'system': 'linux'}}, 'Build Dependencies': {'blas': {'name': 'scipy-openblas', 'found': True, 'version': '0.3.33.112.0', 'detection method': 'pkgconfig', 'include directory': '/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include', 'lib directory': '/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib', 'openblas configuration': 'OpenBLAS 0.3.33.112.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64', 'pc file directory': '/project/.openblas'}, 'lapack': {'name': 'scipy-openblas', 'found': True, 'version': '0.3.33.112.0', 'detection method': 'pkgconfig', 'include directory': '/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include', 'lib directory': '/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib', 'openblas configuration': 'OpenBLAS 0.3.33.112.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64', 'pc file directory': '/project/.openblas'}}, 'Python Information': {'path': '/tmp/build-env-kd0sw37v/bin/python', 'version': '3.12'}, 'SIMD Extensions': {'baseline': ['X86_V2'], 'found': ['X86_V3'], 'not found': ['X86_V4', 'AVX512_ICL', 'AVX512_SPR']}}",
+  "config_hash": "9967d3b14942d926",
+  "cuda_version_if_present": "",
+  "dataset_manifest_hash": "16bbd6c64ff67820b84caae2e272e7e937c701bd164e467df46593bea2e03f11",
+  "dependency_lock_hash": "f8ce0de09b61d27ef85d6b1c3961172194c4705aef5ca3daaf5e7c844dfd3087",
+  "deterministic_algorithms_enabled": false,
+  "environment_hash": "2a526225a4220c03",
+  "full_commit_sha": "eee81c35ddf8bf7cbcd1a377b926a6c34cc4a437",
+  "git_tree_dirty": false,
+  "numpy_version": "2.5.1",
+  "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.39",
+  "protocol_hash": "5b5d2d434a6045dffb0e08ab6e71fd543d0bac388abb6bb48080666c1e793762",
+  "python_version": "3.12.3",
+  "random_seed_bundle": {
+    "model_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "routing_seeds": [
+      101
+    ],
+    "split_seed": 20260721
+  },
+  "scipy_version": "1.18.0",
+  "split_manifest_hash": "ff9bdb975801883ae62b0408e96c20a957e828d73e033a14011b70858c5ccfdb",
+  "torch_version": "2.13.0+cpu",
+  "wfdb_version": "4.3.1"
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="512">
+<rect width="900" height="100%" fill="white"/>
+<text x="24" y="36" font-family="monospace" font-size="18">E01v2 Oracle vs Deployable</text>
+<text x="24" y="70" font-family="monospace" font-size="13">gru_factored-16: deployable-oracle -0.1992</text>
+<text x="24" y="94" font-family="monospace" font-size="13">gru_factored-16: deployable-oracle -0.3541</text>
+<text x="24" y="118" font-family="monospace" font-size="13">gru_factored-16: deployable-oracle -0.6403</text>
+<text x="24" y="142" font-family="monospace" font-size="13">gru_factored-16: deployable-oracle -0.3645</text>
+<text x="24" y="166" font-family="monospace" font-size="13">gru_factored-16: deployable-oracle -0.1266</text>
+<text x="24" y="190" font-family="monospace" font-size="13">gru_factored-32: deployable-oracle -0.1373</text>
+<text x="24" y="214" font-family="monospace" font-size="13">gru_factored-32: deployable-oracle -0.2719</text>
+<text x="24" y="238" font-family="monospace" font-size="13">gru_factored-32: deployable-oracle -0.5121</text>
+<text x="24" y="262" font-family="monospace" font-size="13">gru_factored-32: deployable-oracle -0.3483</text>
+<text x="24" y="286" font-family="monospace" font-size="13">gru_factored-32: deployable-oracle -0.0710</text>
+<text x="24" y="310" font-family="monospace" font-size="13">gru_monolithic-16: deployable-oracle -0.2168</text>
+<text x="24" y="334" font-family="monospace" font-size="13">gru_monolithic-16: deployable-oracle -0.3511</text>
+<text x="24" y="358" font-family="monospace" font-size="13">gru_monolithic-16: deployable-oracle -0.6969</text>
+<text x="24" y="382" font-family="monospace" font-size="13">gru_monolithic-16: deployable-oracle -0.3576</text>
+<text x="24" y="406" font-family="monospace" font-size="13">gru_monolithic-16: deployable-oracle -0.1214</text>
+<text x="24" y="430" font-family="monospace" font-size="13">gru_monolithic-32: deployable-oracle -0.1516</text>
+<text x="24" y="454" font-family="monospace" font-size="13">gru_monolithic-32: deployable-oracle -0.3583</text>
+<text x="24" y="478" font-family="monospace" font-size="13">gru_monolithic-32: deployable-oracle -0.5463</text>
+</svg>

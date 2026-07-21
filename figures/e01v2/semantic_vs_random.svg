@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="128">
+<rect width="900" height="100%" fill="white"/>
+<text x="24" y="36" font-family="monospace" font-size="18">E01v2 Semantic vs Random</text>
+<text x="24" y="70" font-family="monospace" font-size="13">same_budget_factored16_minus_random16: success=False</text>
+<text x="24" y="94" font-family="monospace" font-size="13">same_budget_factored32_minus_random32: success=True</text>
+</svg>
