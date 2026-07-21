@@ -1,0 +1,7 @@
+model_id,total_state_dim,mean_macro_f1,recurrent_param_count,recurrent_state_bytes
+gru_monolithic,16,0.7482,768,64
+gru_monolithic,32,0.7642,3072,128
+gru_factored,16,0.7552,384,64
+gru_factored,32,0.7565,1536,128
+gru_random,16,0.7336,384,64
+gru_random,32,0.7377,1536,128

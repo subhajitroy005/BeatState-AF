@@ -4,6 +4,7 @@ __pycache__/
 datasets/raw/
 datasets/interim/
 datasets/processed/
+data/afdb/
 checkpoints/
 *.egg-info/
 .venv/

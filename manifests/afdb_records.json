@@ -1,0 +1,17 @@
+{
+  "dataset": "afdb",
+  "source": "PhysioNet MIT-BIH Atrial Fibrillation Database (afdb)",
+  "url": "https://physionet.org/content/afdb/1.0.0/",
+  "fs_hz": 250,
+  "signal_channel": 0,
+  "n_signal_records": 23,
+  "note": "Records 00735 and 03665 are annotation-only (no signal files) and are excluded. patient_id == record id. Machine .qrs beats are the oracle R-peaks; the causal detector in beatstate_af/preprocessing/qrs.py provides the deployable R-peaks. Frozen before the confirmatory kill gate; do not edit (fork a v2).",
+  "per_record_max_beats": 15000,
+  "label_rule": "AFIB rhythm segments -> y=1; all other rhythms (N, AFL, J) -> y=0 (standard AFDB AF-detection labeling).",
+  "records": [
+    "04015", "04043", "04048", "04126", "04746", "04908", "04936",
+    "05091", "05121", "05261", "06426", "06453", "06995", "07162",
+    "07859", "07879", "07910", "08215", "08219", "08378", "08405",
+    "08434", "08455"
+  ]
+}

@@ -17,6 +17,15 @@ lint:  ## byte-compile everything (cheap syntax gate)
 run-kill-gate:  ## THE DIRTY KILL: synthetic walking-skeleton kill gate
 	$(PY) experiments/run_kill_gate.py --config configs/experiments/kill_gate_pilot.yaml
 
+download-afdb:  ## fetch the frozen AFDB record prefixes into data/afdb (curl range)
+	$(PY) scripts/_fetch_afdb_prefix.py
+
+run-kill-gate-afdb:  ## CONFIRMATORY: trained GRU on real AFDB, deployable R-peaks (Task 4)
+	$(PY) experiments/run_kill_gate.py --config configs/experiments/kill_gate_afdb.yaml
+
+run-kill-gate-afdb-oracle:  ## Delta_QRS diagnostic: same, oracle R-peaks
+	$(PY) experiments/run_kill_gate.py --config configs/experiments/kill_gate_afdb_oracle.yaml
+
 verify-results:  ## check result rows carry full provenance schema
 	$(PY) scripts/verify_results.py results/primary/kill_gate_patient_seed.csv
 

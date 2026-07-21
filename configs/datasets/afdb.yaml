@@ -1,0 +1,29 @@
+# FROZEN dataset definition for PhysioNet MIT-BIH AF Database (afdb).
+# Consumed by beatstate_af.data.wfdb_io. patient_id == record id.
+dataset: afdb
+manifest: manifests/afdb_records.json
+cache_dir: data/afdb            # local wfdb cache (gitignored); see scripts/download_data.py
+fs_hz: 250
+signal_channel: 0              # ECG1
+per_record_max_beats: 15000    # prespecified cap for the pilot kill gate (~3.3 h/record)
+
+# --- token contract (identical layout to beatstate_af.data.synthetic) ---
+# feat[:, 0:4] atrial-morphology : p_wave_score, fwave_energy, morph_amp, morph_zcr
+# feat[:, 4:8] ventricular-rhythm: rr, drr, rr_over_median, local_var
+atrial_idx: [0, 1, 2, 3]
+rhythm_idx: [4, 5, 6, 7]
+
+# --- labels ---
+# AFIB -> 1 ; N/AFL/J -> 0 (standard AFDB AF-detection labeling)
+af_rhythms: ["AFIB"]
+
+# --- R-peak provenance ---
+# oracle     : machine .qrs beats shipped with AFDB (upper-bound diagnostic)
+# deployable : causal QRS detector in beatstate_af.preprocessing.qrs (primary result)
+qrs_modes: [oracle, deployable]
+
+# --- discordance (prespecified; see docs/discordance_definition.md) ---
+discordance:
+  transition_window_s: 5.0     # beats within +/-5 s of an AFIB onset/offset boundary
+  nonaf_arrhythmia: ["AFL", "J"]   # non-AFIB atrial/junctional arrhythmia beats
+  low_sqi_percentile: 10       # per-record lowest-decile atrial-segment SQI

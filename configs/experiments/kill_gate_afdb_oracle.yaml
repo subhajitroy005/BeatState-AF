@@ -1,0 +1,29 @@
+# FROZEN confirmatory kill gate: trained GRU on REAL AFDB with ORACLE R-peaks.
+# Delta_QRS diagnostic vs the deployable run; NOT the primary verdict.
+experiment_id: kill_gate_afdb_oracle
+dataset_id: afdb_oracle        # machine .qrs beats (upper-bound diagnostic only)
+dataset_config: configs/datasets/afdb.yaml
+model_family: gru
+output_tag: oracle
+models: [gru_monolithic, gru_factored, gru_random]
+arm_monolithic: gru_monolithic
+arm_factored: gru_factored
+arm_random: gru_random
+train_frac: 0.6
+seeds: [0, 1, 2]
+state_dims: [16, 32]
+dtype_bytes: 4
+# success routes (docs/protocol.md; roadmap 3.5)
+superiority_margin: 0.0
+equivalence_margin: 0.02
+compression_low_dim: 16
+compression_high_dim: 32
+# trained-model hyperparameters (frozen). Compute-bounded pilot: training BPTT is
+# truncated to train_max_beats/patient; evaluation always uses full sequences.
+gru:
+  epochs: 6
+  lr: 0.01
+  weight_decay: 0.0001
+  chunk_len: 1024
+  grad_clip: 2.0
+  train_max_beats: 6000
